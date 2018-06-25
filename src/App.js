@@ -39,7 +39,7 @@ class App extends Component {
             <div className="container">
                 <h1 className="text-center"> Previsão do tempo </h1>
                 <div className="row">
-                    <div className="col-sm-offset-4 col-sm-4">
+                    <div className="col-sm-offset-3 col-sm-6">
                         <CityCard weather={this.props.weather} onClose={this.props.clear}/>
                         <div className="input-group">
                             <AsyncTypeahead
