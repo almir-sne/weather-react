@@ -6,6 +6,7 @@ import {City, CityTable} from "./CityTable";
 import {AsyncTypeahead} from "react-bootstrap-typeahead"
 import {search} from './api'
 import {connect} from 'react-redux'
+import {CityCard} from './CityCard'
 
 class App extends Component {
     constructor(props) {
@@ -26,7 +27,9 @@ class App extends Component {
     };
 
     onChange = selected => {
-        this.props.findByWoeid(selected[0].woeid)
+        if(selected) {
+            this.props.findByWoeid(selected[0].woeid)
+        }
     };
 
     render() {
@@ -36,7 +39,8 @@ class App extends Component {
             <div className="container">
                 <h1 className="text-center"> Previsão do tempo </h1>
                 <div className="row">
-                    <div className="col-md-offset-4 col-md-4">
+                    <div className="col-sm-offset-4 col-sm-4">
+                        <CityCard weather={this.props.weather} onClose={this.props.clear}/>
                         <div className="input-group">
                             <AsyncTypeahead
                                 placeholder="Insira aqui o nome da cidade"
@@ -52,13 +56,13 @@ class App extends Component {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-offset-4">
+                    <div className="col-sm-offset-4">
 
                         <h2> Capitais </h2>
-                        <div className="col-md-3">
+                        <div className="col-sm-3">
                             <CityTable cities={cities1}/>
                         </div>
-                        <div className="col-md-3">
+                        <div className="col-sm-3">
                             <CityTable cities={cities2}/>
                         </div>
                     </div>
@@ -77,7 +81,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        findByWoeid: (woeid) => dispatch({type: 'FIND_BY_WOEID', woeid})
+        findByWoeid: (woeid) => dispatch({type: 'FIND_BY_WOEID', woeid}),
+        clear: () => dispatch({type: "CLEAR"})
     }
 };
 

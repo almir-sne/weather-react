@@ -9,5 +9,5 @@ export const search = (str) => {
 };
 
 export const findByWoeid= (woeid) => {
-    return request("select * from weather.forecast where woeid = " + woeid)
+    return request("select * from weather.forecast where u='c' and woeid = " + woeid)
 }

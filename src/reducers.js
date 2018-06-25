@@ -5,6 +5,8 @@ export default function timer(state = {}, action) {
                 ...state,
                 weather: action.weather
             };
+        case 'CLEAR':
+            return {};
         default:
             return state
     }
