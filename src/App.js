@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.css';
 import './App.css';
-import {City, CityTable} from "./CityTable";
-import {AsyncTypeahead} from "react-bootstrap-typeahead"
+import {CityTable} from "./CityTable";
 import {search} from './api'
 import {connect} from 'react-redux'
 import {CityCard} from './CityCard'
+import {TypeAhead} from "./TypeAhead";
 
 class App extends Component {
     constructor(props) {
@@ -27,31 +27,23 @@ class App extends Component {
     };
 
     onChange = selected => {
-        if(selected) {
+        if(selected && selected.length > 0) {
             this.props.findByWoeid(selected[0].woeid)
         }
     };
 
+    componentDidMount() {
+        this.props.findByList(["Rio de Janeiro", "São Paulo", "Salvador", "Curitiba"]);
+    }
+
     render() {
-        let cities1 = [City(18, 27, "Rio de Janeiro"), City(14, 22, "São Paulo")];
-        let cities2 = [City(23, 37, "Salvador"), City(5, 14, "Curitiba")];
         return (
             <div className="container">
                 <h1 className="text-center"> Previsão do tempo </h1>
                 <div className="row">
                     <div className="col-sm-offset-3 col-sm-6">
                         <CityCard weather={this.props.weather} onClose={this.props.clear}/>
-                        <div className="input-group">
-                            <AsyncTypeahead
-                                placeholder="Insira aqui o nome da cidade"
-                                isLoading={this.state.isLoading}
-                                onChange={this.onChange}
-                                labelKey={option => `${option.name} ${option.country.code}`}
-                                onSearch={this.onSearch}
-                                options={this.state.options}
-                            />
-                            <span className="input-group-addon" id="basic-addon2"> <i className="fa fa-search"/> </span>
-                        </div>
+                        <TypeAhead isLoading={this.state.isLoading} onChange={this.onChange} onSearch={this.onSearch} options={this.state.options}/>
                         <hr/>
                     </div>
                 </div>
@@ -60,10 +52,7 @@ class App extends Component {
 
                         <h2> Capitais </h2>
                         <div className="col-sm-3">
-                            <CityTable cities={cities1}/>
-                        </div>
-                        <div className="col-sm-3">
-                            <CityTable cities={cities2}/>
+                            <CityTable cities={this.props.cities}/>
                         </div>
                     </div>
                 </div>
@@ -75,13 +64,15 @@ class App extends Component {
 
 const mapStateToProps = state => {
     return {
-        weather: state.weather
+        weather: state.weather,
+        cities: state.cities
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         findByWoeid: (woeid) => dispatch({type: 'FIND_BY_WOEID', woeid}),
+        findByList: (cities) => dispatch({type: 'FIND_BY_LIST', cities}),
         clear: () => dispatch({type: "CLEAR"})
     }
 };
