@@ -10,15 +10,15 @@ export const CityCard = ({weather, onClose}) =>
                 {weather.item.condition.temp}°C {weather.item.condition.text}
             </h2>
             <div className="row">
-                <div className="col-sm-offset-1 col-sm-3 col-lg-1">
+                <div className="col-xs-offset-1 col-xs-3 col-sm-3 col-lg-2">
                     <i className="fa fa-arrow-down"/>
                     {weather.item.forecast[0].low}°C
                 </div>
-                <div className="col-sm-3 col-lg-1">
+                <div className="col-xs-3 col-sm-3 col-lg-2">
                     <i className="fa fa-arrow-up"/>
                     {weather.item.forecast[0].high}°C
                 </div>
-                <div className="col-sm-5">
+                <div className="col-xs-4 col-sm-5">
                     Vento {weather.wind.speed}km/h
                 </div>
             </div>
@@ -36,7 +36,7 @@ export const CityCard = ({weather, onClose}) =>
     </Fragment>
 
 const Forecast = ({forecast}) =>
-    <div className="col-sm-2">
+    <div className="col-xs-4 col-sm-2">
         <div className="text-center"> {forecast.day} </div>
         <div className="text-center"> {forecast.low }°C {forecast.high}°C </div>
     </div>

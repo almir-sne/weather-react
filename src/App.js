@@ -68,7 +68,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        findByWoeid: (woeid) => { console.log(woeid); dispatch({type: 'FIND_BY_WOEID', woeid})},
+        findByWoeid: (woeid) => { dispatch({type: 'FIND_BY_WOEID', woeid})},
         findByList: (cities) => dispatch({type: 'FIND_BY_LIST', cities}),
         loadWeather: (weather) => dispatch({type: 'LOAD_WEATHER_CARD', weather}),
         clear: () => dispatch({type: "CLEAR"})

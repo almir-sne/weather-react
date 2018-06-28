@@ -11,7 +11,10 @@ export default function timer(state = {}, action) {
                 cities: action.cities
             };
         case 'CLEAR':
-            return {};
+            return {
+                ...state,
+                weather: undefined
+            };
         default:
             return state
     }
