@@ -33,7 +33,7 @@ class App extends Component {
     };
 
     componentDidMount() {
-        this.props.findByList(["Rio de Janeiro", "São Paulo", "Salvador", "Curitiba"]);
+        this.props.findByList(["Rio de Janeiro", "São Paulo", "Belo Horizonte", "Brasília", "Belém", "Salvador", "Curitiba", "Fortaleza", "Manaus", "João Pessoa"]);
     }
 
     render() {
@@ -48,12 +48,9 @@ class App extends Component {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-sm-offset-4">
-
+                    <div className="col-xs-offset-4">
                         <h2> Capitais </h2>
-                        <div className="col-sm-3">
-                            <CityTable cities={this.props.cities}/>
-                        </div>
+                        <CityTable cities={this.props.cities}/>
                     </div>
                 </div>
 
