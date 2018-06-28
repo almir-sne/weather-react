@@ -26,7 +26,7 @@ class App extends Component {
         });
     };
 
-    onChange = selected => {
+    loadWeatherCard = selected => {
         if(selected && selected.length > 0) {
             this.props.findByWoeid(selected[0].woeid)
         }
@@ -41,16 +41,16 @@ class App extends Component {
             <div className="container">
                 <h1 className="text-center"> Previsão do tempo </h1>
                 <div className="row">
-                    <div className="col-sm-offset-3 col-sm-6">
+                    <div className="col-xs-offset-2 col-sm-offset-3 col-md-offset-3 col-xs-8 col-sm-7 col-md-6">
                         <CityCard weather={this.props.weather} onClose={this.props.clear}/>
-                        <TypeAhead isLoading={this.state.isLoading} onChange={this.onChange} onSearch={this.onSearch} options={this.state.options}/>
+                        <TypeAhead isLoading={this.state.isLoading} onChange={this.loadWeatherCard} onSearch={this.onSearch} options={this.state.options}/>
                         <hr/>
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-xs-offset-4">
+                    <div className="col-xs-offset-4 col-sm-offset-5 col-md-offset-4">
                         <h2> Capitais </h2>
-                        <CityTable cities={this.props.cities}/>
+                        <CityTable cities={this.props.cities} onClickHandler={this.props.loadWeather}/>
                     </div>
                 </div>
 
@@ -68,8 +68,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        findByWoeid: (woeid) => dispatch({type: 'FIND_BY_WOEID', woeid}),
+        findByWoeid: (woeid) => { console.log(woeid); dispatch({type: 'FIND_BY_WOEID', woeid})},
         findByList: (cities) => dispatch({type: 'FIND_BY_LIST', cities}),
+        loadWeather: (weather) => dispatch({type: 'LOAD_WEATHER_CARD', weather}),
         clear: () => dispatch({type: "CLEAR"})
     }
 };

@@ -1,6 +1,6 @@
 export default function timer(state = {}, action) {
     switch (action.type) {
-        case 'FIND_BY_WOEID_SUCCESS':
+        case 'LOAD_WEATHER_CARD':
             return {
                 ...state,
                 weather: action.weather

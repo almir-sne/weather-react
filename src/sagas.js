@@ -7,7 +7,7 @@ export function* findByWoeidRequest({woeid}) {
 
     if (response && (response.status === 200)) {
         yield put({
-            type: 'FIND_BY_WOEID_SUCCESS',
+            type: 'LOAD_WEATHER_CARD',
             weather: response.data.query.results.channel
         });
     }
